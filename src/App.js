@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import EventCard from "./components/EventCard.component";
+import Footer from "./components/Footer.component";
+import Header from "./components/Header.component";
+import "./index.css";
+import { fetchEvents } from "./utils/API/MarvelApi";
 
-function App() {
+const App = () => {
+  const [events, setEvents] = useState([]);
+
+  const fetchEventsData = async () => {
+    const result = await fetchEvents();
+    console.log(result);
+    return await result.map(event => {
+      return (
+        <EventCard
+          key={event.id}
+          description={event.description}
+          title={event.title}
+          image={event.thumbnail}
+          start={event.start}
+          end={event.end}
+          previous={event.previous}
+          next={event.next}
+        />
+      );
+    });
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const events = await fetchEventsData();
+      setEvents(events);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <div className='max-w-5xl mx-auto flex flex-row flex-wrap justify-center gap-3'>
+        {events}
+      </div>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
