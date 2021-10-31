@@ -38,9 +38,11 @@ const App = () => {
   return (
     <div>
       <Header />
-      <div className='max-w-5xl mx-auto flex flex-row flex-wrap justify-center gap-3'>
-        {events}
-      </div>
+      <main className='max-w-5xl mx-auto'>
+        <div className='flex flex-row flex-wrap justify-center gap-3'>
+          {events}
+        </div>
+      </main>
       <Footer />
     </div>
   );
