@@ -14,8 +14,8 @@ const EventCard = ({ title, description, image, start, end, next, previous }) =>
       <div className="flex flex-col h-full">
         <p className="flex-grow flex-shrink-0">{description}</p>
         <div className="text-sm flex-grow-0 flex-shrink">
-          {previous ? <p><strong>Previous:</strong> {previous.name}</p> : null}
-          {next ? <p><strong>Next:</strong> {next.name}</p> : null}
+          {previous ? <p className="text-bold">Previous: {previous.name}</p> : null}
+          {next ? <p><span className="text-bold">Next:</span> {next.name}</p> : null}
         </div>
       </div>
     )
